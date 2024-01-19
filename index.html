@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="form.js"></script>
+</head>
+<body>
+   <form  onsubmit="return validate()" action="https://sheetdb.io/api/v1/d2exwnussgirr" method="POST" id="sheetdb-form">
+    <h3>STUDENT DETAILS</h3><br>
+        <input type="text" name="data[User Name]" id="uname" placeholder="User name" > 
+        <span id="msg1" style="color: red;"></span> <br><br>
+        <input type="email" name="data[Email]" id="email" placeholder="Email">
+        <span id="msg2" style="color: red;"></span> <br><br>
+        <input type="text" name="data[Phone]" id="pn" placeholder="Phone Number"> 
+        <span id="msg3" style="color: red;"></span> <br><br>
+        <input type="password" name="data[Password]" id="psd" placeholder="Password">
+        <span id="msg4" style="color: red;"></span> <br><br>
+        <input type="password" name="data[Confirm Password]" id="cpsd" placeholder="Confirm Password">  
+        <span id="msg5" style="color: red;"></span> <br><br>
+        <input type="submit" > 
+        <script>
+            var form=document.getElementById("sheetdb-form")
+            form.addEventListener("submit", e=>{
+                e.preventDefault(); //previent automatic submit
+                if(!validate()){
+                    return;
+                }
+                fetch(form.action,{
+                    method:"POST",
+                    body: new FormData(document.getElementById("sheetdb-form")),
+                }).then(() => {
+                    window.open('msg.html','-blank');
+
+                    document.getElementById("msg1").innerHTML = "";
+                    document.getElementById("msg2").innerHTML = "";
+                    document.getElementById("msg3").innerHTML = "";
+                    document.getElementById("msg4").innerHTML = "";
+                    document.getElementById("msg5").innerHTML = "";
+
+
+                    form.reset();
+                });
+            })
+        </script>
+
+    </form>
+</body>
+</html>
